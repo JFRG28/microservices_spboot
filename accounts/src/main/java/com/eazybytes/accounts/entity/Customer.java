@@ -20,6 +20,4 @@ public class Customer extends BaseEntity {
     private String email;
     private String mobileNumber;
 
-
-
 }

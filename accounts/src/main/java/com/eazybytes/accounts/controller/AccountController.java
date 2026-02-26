@@ -36,10 +36,19 @@ public class AccountController {
             summary = "Create Account REST API",
             description = "REST API to create a new Customer & Account inside PacoBank"
     )
-    @ApiResponse(
-            responseCode = "201",
-            description = "HTTP Status Created"
-    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "HTTP Status Created"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
     @PostMapping("/createAccount")
     public ResponseEntity<ResponseDto> createAccount(@Valid @RequestBody CustomerDto customerDto){
         iAccountService.createAccount(customerDto);
@@ -52,10 +61,19 @@ public class AccountController {
             summary = "Fetch Account details REST API",
             description = "REST API to fetch Customer & Account details based on a mobile number"
     )
-    @ApiResponse(
-            responseCode = "200",
-            description = "HTTP Status OK"
-    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    })
     @GetMapping("/fetchAccount")
     public ResponseEntity<CustomerDto> fetchAccountDetail(@RequestParam
                                                               @Pattern(regexp = "(^$|[0-9]{10})",message = "Mobile number must be 10 digits. Numbers only.")
@@ -75,6 +93,10 @@ public class AccountController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
+                    responseCode = "417",
+                    description = "Expectation failed"
+            ),
+            @ApiResponse(
                     responseCode = "500",
                     description = "HTTP Status Internal server error",
                     content = @Content(
@@ -91,8 +113,8 @@ public class AccountController {
                     .body(new ResponseDto(AccountConstants.STATUS_200,AccountConstants.MESSAGE_200));
         } else {
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(AccountConstants.STATUS_500,AccountConstants.MESSAGE_500));
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(AccountConstants.STATUS_417,AccountConstants.MESSAGE_417_UPDATE));
         }
     }
 
@@ -106,8 +128,15 @@ public class AccountController {
                     description = "HTTP Status OK"
             ),
             @ApiResponse(
+                    responseCode = "417",
+                    description = "Expectation failed"
+            ),
+            @ApiResponse(
                     responseCode = "500",
-                    description = "HTTP Status Internal server error"
+                    description = "HTTP Status Internal server error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
             )
     })
     @DeleteMapping("/deleteAccount")
@@ -121,8 +150,8 @@ public class AccountController {
                     .body(new ResponseDto(AccountConstants.STATUS_200,AccountConstants.MESSAGE_200));
         } else {
             return ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDto(AccountConstants.STATUS_500,AccountConstants.MESSAGE_500));
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDto(AccountConstants.STATUS_417,AccountConstants.MESSAGE_417_DELETE));
         }
     }
 

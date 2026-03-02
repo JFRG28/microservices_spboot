@@ -1,5 +1,5 @@
 # Start with a base image containing Java runtime
-FROM openjdk:17-jdk-slim
+FROM openjdk:27-ea-jdk-slim
 
 # Information around who mantains the image
 LABEL authors="paco"

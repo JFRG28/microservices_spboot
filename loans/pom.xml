@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>loans</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-configuration</version>
     <packaging>jar</packaging>
     <name>loans</name>
     <description>loans</description>
@@ -114,7 +114,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v1</name>
+                        <name>jfrg28/${project.artifactId}:v2</name>
                     </image>
                     <excludes>
                         <exclude>

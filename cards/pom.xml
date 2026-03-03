@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>cards</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-configuration</version>
     <packaging>jar</packaging>
     <name>cards</name>
     <description>cards</description>
@@ -113,22 +113,15 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <image>
+                        <name>jfrg28/${project.artifactId}:v2</name>
+                    </image>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.5.1</version>
-                <configuration>
-                    <to>
-                        <image>jfrg28/${project.artifactId}:v1</image>
-                    </to>
                 </configuration>
             </plugin>
         </plugins>

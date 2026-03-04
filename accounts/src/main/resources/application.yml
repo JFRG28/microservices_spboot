@@ -14,12 +14,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-  config:
-    import:
-      - optional:application-qa.yml
-      - optional:application-prod.yml
   profiles:
-    active: prod
+    active: qa
 
 build:
   version: "3.0"

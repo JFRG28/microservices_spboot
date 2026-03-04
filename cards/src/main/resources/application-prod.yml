@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to PacoBank-Cards microservice-PROD profile"
+  contactDetails:
+    name: "Lionel Messi-Product owner"
+    email: "product_owner@pacobank.com"
+  onCallSupport:
+    - (55) 1234
+    - (55) 1235

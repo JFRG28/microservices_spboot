@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+loans:
+  message: "Welcome to PacoBank-Loans microservice-QA profile"
+  contactDetails:
+    name: "Pedri-QA Leader"
+    email: "qa_leader@pacobank.com"
+  onCallSupport:
+    - (52) 1234
+    - (52) 1235

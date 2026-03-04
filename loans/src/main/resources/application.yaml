@@ -16,3 +16,17 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  profiles:
+    active: prod
+
+build:
+  version: "3.0"
+
+loans:
+  message: "Welcome to PacoBank-Loans microservice-Default profile"
+  contactDetails:
+    name: "JFRG28-Developer"
+    email: "developer@pacobank.com"
+  onCallSupport:
+    - 911
+    - 066

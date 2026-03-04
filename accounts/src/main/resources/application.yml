@@ -14,15 +14,21 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import:
+      - optional:application_qa.yml
+      - optional:application_prod.yml
+  profiles:
+    active: "qa"
 
 build:
-  version: "@project.version@"
+  version: "3.0"
 
 accounts:
-  message: "Welcome to PacoBank-Accounts microservice"
+  message: "Welcome to PacoBank-Accounts microservice-Default profile"
   contactDetails:
-    name: "JFRG28"
-    email: "fgrodriguez.28@gmail.com"
+    name: "JFRG28-Developer"
+    email: "developer@pacobank.com"
   onCallSupport:
     - 911
     - 066

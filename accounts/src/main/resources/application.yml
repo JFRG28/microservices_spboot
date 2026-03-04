@@ -17,3 +17,12 @@ spring:
 
 build:
   version: "@project.version@"
+
+accounts:
+  message: "Welcome to PacoBank-Accounts microservice"
+  contactDetails:
+    name: "JFRG28"
+    email: "fgrodriguez.28@gmail.com"
+  onCallSupport:
+    - 911
+    - 066

@@ -2,7 +2,7 @@ build:
   version: "3.0"
 
 accounts:
-  message: "Welcome to PacoBank-Accounts microservice-Default profile"
+  message: "Welcome to PacoBank-Cards microservice-Default profile"
   contactDetails:
     name: "JFRG28-Developer"
     email: "developer@pacobank.com"

@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+cards:
+  message: "Welcome to PacoBank-Cards microservice-Default profile"
+  contactDetails:
+    name: "JFRG28-Developer"
+    email: "developer@pacobank.com"
+  onCallSupport:
+    - 911
+    - 066

@@ -10,7 +10,8 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>configserver</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-configuration</version>
+    <packaging>jar</packaging>
     <name>configserver</name>
     <description>configserver</description>
     <url/>
@@ -70,6 +71,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                <image>
+                    <name>jfrg28/${project.artifactId}:v2</name>
+                </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>

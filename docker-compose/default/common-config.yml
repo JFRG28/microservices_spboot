@@ -11,7 +11,7 @@ services:
         limits:
           memory: 1G # Also increased for Swarm consistency
     environment:
-      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_HOST: rabbit
 
   microservice-configserver-config:
     extends:

@@ -1,16 +1,16 @@
 package com.eazybytes.loans.repository;
 
-import com.eazybytes.loans.entity.Loans;
+import com.eazybytes.loans.entity.Loan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface LoansRepository extends JpaRepository<Loans, Long> {
+public interface LoansRepository extends JpaRepository<Loan, Long> {
 
-    Optional<Loans> findByMobileNumber(String mobileNumber);
+    Optional<Loan> findByMobileNumber(String mobileNumber);
 
-    Optional<Loans> findByLoanNumber(String loanNumber);
+    Optional<Loan> findByLoanNumber(String loanNumber);
 
 }

@@ -9,11 +9,13 @@ services:
     deploy:
       resources:
         limits:
-          memory: 700m
+          memory: 1G # Also increased for Swarm consistency
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
 
   microservice-configserver-config:
     extends:
       service: microservice-base-config
     environment:
       SPRING_PROFILES_ACTIVE: default
-      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/

@@ -123,6 +123,7 @@
 				<configuration>
 					<image>
 						<name>jfrg28/${project.artifactId}:v3</name>
+						<builder>paketobuildpacks/builder-jammy-full:latest</builder>
 					</image>
 					<excludes>
 						<exclude>

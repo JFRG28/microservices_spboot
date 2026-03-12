@@ -82,7 +82,7 @@ services:
       service: microservice-configserver-config
 
   loans:
-    image: jfrg28/loan:v3
+    image: jfrg28/loans:v3
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -99,7 +99,7 @@ services:
       service: microservice-configserver-config
 
   cards:
-    image: jfrg28/card:v3
+    image: jfrg28/cards:v3
     container_name: cards-ms
     ports:
       - "9000:9000"

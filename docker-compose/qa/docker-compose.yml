@@ -33,44 +33,83 @@ services:
       file: common-config.yml
       service: microservice-base-config
 
+  accounts-server-db:
+    container_name: accountsdb
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: accountsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  loans-server-db:
+    container_name: loansdb
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: loansdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  cards-server-db:
+    container_name: cardsdb
+    ports:
+      - "3308:3306"
+    environment:
+      MYSQL_DATABASE: cardsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
   accounts:
-    image: jfrg28/accounts:v2
+    image: jfrg28/accounts:v3
     container_name: accounts-ms
     ports:
       - "8080:8080"
     depends_on:
       configserver:
         condition: service_healthy
+      accounts-server-db:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: accounts
+      SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   loans:
-    image: jfrg28/loans:v2
+    image: jfrg28/loan:v3
     container_name: loans-ms
     ports:
       - "8090:8090"
     depends_on:
       configserver:
         condition: service_healthy
+      accounts-server-db:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: loans
+      SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   cards:
-    image: jfrg28/cards:v2
+    image: jfrg28/card:v3
     container_name: cards-ms
     ports:
       - "9000:9000"
     depends_on:
       configserver:
         condition: service_healthy
+      accounts-server-db:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: cards
+      SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
     extends:
       file: common-config.yml
       service: microservice-configserver-config

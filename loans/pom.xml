@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.eazybytes</groupId>
-    <artifactId>loan</artifactId>
+    <artifactId>loans</artifactId>
     <version>0.0.3-mysql</version>
     <packaging>jar</packaging>
-    <name>loan</name>
-    <description>loan</description>
+    <name>loans</name>
+    <description>loans</description>
     <url/>
     <licenses>
         <license/>
@@ -136,6 +136,7 @@
                 <configuration>
                     <image>
                         <name>jfrg28/${project.artifactId}:v3</name>
+                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                     <excludes>
                         <exclude>

@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.eazybytes</groupId>
-    <artifactId>card</artifactId>
+    <artifactId>cards</artifactId>
     <version>0.0.3-mysql</version>
     <packaging>jar</packaging>
-    <name>card</name>
-    <description>card</description>
+    <name>cards</name>
+    <description>Microservice for Cards</description>
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2025.1.0</spring-cloud.version>
@@ -123,6 +123,7 @@
                 <configuration>
                     <image>
                         <name>jfrg28/${project.artifactId}:v3</name>
+                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                     <excludes>
                         <exclude>

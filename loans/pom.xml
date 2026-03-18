@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>loans</artifactId>
-    <version>0.0.3-mysql</version>
+    <version>0.0.4-eureka-feign</version>
     <packaging>jar</packaging>
     <name>loans</name>
     <description>loans</description>
@@ -139,7 +139,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v3</name>
+                        <name>jfrg28/${project.artifactId}:v4</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                     <excludes>

@@ -1,10 +1,10 @@
-package com.eazybytes.cards;
+package com.eazybytes.eurekaserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CardsApplicationTests {
+class EurekaserverApplicationTests {
 
     @Test
     void contextLoads() {

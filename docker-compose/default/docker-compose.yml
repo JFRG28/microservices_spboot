@@ -33,6 +33,26 @@ services:
       file: common-config.yml
       service: microservice-base-config
 
+  eurekaserver:
+    image: jfrg28/eurekaserver:v1
+    container_name: eurekaserver-ms
+    ports:
+      - "8070:8070"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    extends:
+      file: common-config.yml
+      service: microservice-configserver-config
+    environment:
+      SPRING_APPLICATION_NAME: eurekaserver
+
   accounts-server-db:
     container_name: accountsdb
     ports:
@@ -64,7 +84,7 @@ services:
       service: microservice-db-config
 
   accounts:
-    image: jfrg28/accounts:v3
+    image: jfrg28/accounts:v4
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -78,10 +98,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   loans:
-    image: jfrg28/loans:v3
+    image: jfrg28/loans:v4
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -95,10 +115,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://loans-server-db:3306/loansdb
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
   cards:
-    image: jfrg28/cards:v3
+    image: jfrg28/cards:v4
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -112,7 +132,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://cards-server-db:3306/cardsdb
     extends:
       file: common-config.yml
-      service: microservice-configserver-config
+      service: microservice-eureka-config
 
 networks:
   pacobank-network:

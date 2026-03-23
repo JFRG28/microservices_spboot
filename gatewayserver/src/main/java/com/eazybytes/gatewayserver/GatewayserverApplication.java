@@ -27,7 +27,7 @@ public class GatewayserverApplication {
                         .uri("lb://ACCOUNTS")) //Application name showed in Eureka Server Dashboard
                 .route(p->p
                     .path("/pacobank/loans/**")
-                    .filters(f->f.rewritePath("/pacobank/accounts/(?<remaining>.*)","/${remaining}")
+                    .filters(f->f.rewritePath("/pacobank/loans/(?<remaining>.*)","/${remaining}")
                             .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
                     .uri("lb://LOANS"))
                 .route(p->p

@@ -48,3 +48,9 @@ info:
     name: cards
     description: Microservice for Cards in PacoBank
     version: 0.0.3-mysql
+
+logging:
+  level:
+    com:
+      eazybytes:
+        cards: DEBUG

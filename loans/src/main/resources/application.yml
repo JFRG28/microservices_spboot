@@ -48,3 +48,9 @@ info:
     name: loans
     description: Microservice for Loans in PacoBank
     version: 0.0.3-mysql
+
+logging:
+  level:
+    com:
+      eazybytes:
+        loans: DEBUG

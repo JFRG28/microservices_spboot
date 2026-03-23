@@ -2,6 +2,11 @@ package com.eazybytes.gatewayserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
 public class GatewayserverApplication {
@@ -10,4 +15,20 @@ public class GatewayserverApplication {
         SpringApplication.run(GatewayserverApplication.class, args);
     }
 
+    @Bean
+    public RouteLocator pacoBankRouteConfig(RouteLocatorBuilder routeLocatorBuilder){
+        return routeLocatorBuilder.routes()
+                .route(p->p
+                        .path("/pacobank/accounts/**")
+                        .filters(f->f.rewritePath("/pacobank/accounts/(?<remaining>.*)","/${remaining}"))
+                        .uri("lb://ACCOUNTS")) //Application name showed in Eureka Server Dashboard
+                .route(p->p
+                    .path("/pacobank/loans/**")
+                    .filters(f->f.rewritePath("/pacobank/accounts/(?<remaining>.*)","/${remaining}"))
+                    .uri("lb://LOANS"))
+                .route(p->p
+                    .path("/pacobank/cards/**")
+                    .filters(f->f.rewritePath("/pacobank/cards/(?<remaining>.*)","/${remaining}"))
+                    .uri("lb://CARDS")).build();
+    }
 }

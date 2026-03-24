@@ -27,12 +27,20 @@ management:
     web:
       exposure:
         include: "*"
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
   info:
     env:
       enabled: true
   endpoint:
     shutdown:
       access: unrestricted
+    health:
+      probes:
+        enabled: true
 
 eureka:
   instance:
@@ -48,3 +56,9 @@ info:
     name: cards
     description: Microservice for Cards in PacoBank
     version: 0.0.3-mysql
+
+logging:
+  level:
+    com:
+      eazybytes:
+        cards: DEBUG

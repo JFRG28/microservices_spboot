@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>cards</artifactId>
-    <version>0.0.4-eureka-feign</version>
+    <version>0.0.5-api-gateway</version>
     <packaging>jar</packaging>
     <name>cards</name>
     <description>Microservice for Cards</description>
@@ -126,7 +126,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v4</name>
+                        <name>jfrg28/${project.artifactId}:v5</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                     <excludes>

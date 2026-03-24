@@ -5,10 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
-
 import java.time.LocalDateTime;
-
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @SpringBootApplication
 public class GatewayserverApplication {
@@ -23,7 +20,9 @@ public class GatewayserverApplication {
                 .route(p->p
                         .path("/pacobank/accounts/**")
                         .filters(f->f.rewritePath("/pacobank/accounts/(?<remaining>.*)","/${remaining}")
-                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+                                .addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+                                .circuitBreaker(config -> config.setName("accountsCircuitBreaker")
+                                        .setFallbackUri("forward:/contactSupport")))
                         .uri("lb://ACCOUNTS")) //Application name showed in Eureka Server Dashboard
                 .route(p->p
                     .path("/pacobank/loans/**")

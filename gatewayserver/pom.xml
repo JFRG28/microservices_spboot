@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>gatewayserver</artifactId>
-    <version>0.0.1-initial</version>
+    <version>0.0.2-resilience4j</version>
     <packaging>jar</packaging>
     <name>gatewayserver</name>
     <description>gatewayserver</description>
@@ -48,6 +48,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -64,6 +68,10 @@
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -85,7 +93,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v1</name>
+                        <name>jfrg28/${project.artifactId}:v2</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                 </configuration>

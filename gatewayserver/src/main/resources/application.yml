@@ -13,6 +13,15 @@ spring:
             locator:
               enabled: false
               lower-case-service-id: true
+          httpclient:
+            connect-timeout: 1000
+            response-timeout: 5s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 
 management:
   endpoints:
@@ -29,10 +38,19 @@ management:
 info:
   app: "gatewayserver"
   description: "Gateway server for microservices in PacoBank"
-  version: "0.0.1-initial"
+  version: "0.0.2-resilience4j"
 
 logging:
   level:
     com:
       eazybytes:
         gatewayserver: DEBUG
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      sliding-window-size: 10
+      permitted-number-of-calls-in-half-open-state: 2
+      failure-rate-threshold: 50
+      wait-duration-in-open-state:
+        seconds: 10

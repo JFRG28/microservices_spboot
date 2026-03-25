@@ -55,7 +55,7 @@ info:
   app:
     name: cards
     description: Microservice for Cards in PacoBank
-    version: 0.0.3-mysql
+    version: 0.0.6-resilience4j
 
 logging:
   level:

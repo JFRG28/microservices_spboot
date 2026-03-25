@@ -38,7 +38,7 @@ management:
 info:
   app: "gatewayserver"
   description: "Gateway server for microservices in PacoBank"
-  version: "0.0.1-initial"
+  version: "0.0.2-resilience4j"
 
 logging:
   level:

@@ -15,7 +15,7 @@ spring:
               lower-case-service-id: true
           httpclient:
             connect-timeout: 1000
-            response-timeout: 2s
+            response-timeout: 5s
 
 management:
   endpoints:
@@ -48,4 +48,3 @@ resilience4j.circuitbreaker:
       failure-rate-threshold: 50
       wait-duration-in-open-state:
         seconds: 10
-

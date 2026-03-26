@@ -11,4 +11,4 @@ target/
 *.log
 
 # Data from Grafana
-./data
+docker-compose/*/.data/

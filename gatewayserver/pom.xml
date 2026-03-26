@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>gatewayserver</artifactId>
-    <version>0.0.2-resilience4j</version>
+    <version>0.0.3-obs-mon</version>
     <packaging>jar</packaging>
     <name>gatewayserver</name>
     <description>gatewayserver</description>
@@ -73,6 +73,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -93,7 +97,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v2</name>
+                        <name>jfrg28/${project.artifactId}:v3</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                 </configuration>

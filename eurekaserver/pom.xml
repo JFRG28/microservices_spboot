@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.eazybytes</groupId>
     <artifactId>eurekaserver</artifactId>
-    <version>0.0.1-initial</version>
+    <version>0.0.2-obs-mon</version>
     <packaging>jar</packaging>
     <name>eurekaserver</name>
     <description>eurekaserver</description>
@@ -50,6 +50,10 @@
             <artifactId>spring-boot-starter-actuator-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -70,7 +74,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>jfrg28/${project.artifactId}:v1</name>
+                        <name>jfrg28/${project.artifactId}:v2</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
                     </image>
                 </configuration>

@@ -34,11 +34,14 @@ management:
   info:
     env:
       enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 info:
   app: "gatewayserver"
   description: "Gateway server for microservices in PacoBank"
-  version: "0.0.2-resilience4j"
+  version: "0.0.3-obs-mon"
 
 logging:
   level:

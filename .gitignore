@@ -9,3 +9,6 @@ target/
 
 # Logs
 *.log
+
+# Data from Grafana
+./data

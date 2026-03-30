@@ -62,15 +62,11 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.5.1</version>
                 <configuration>
-                    <to>
-                        <image>jfrg28/${project.artifactId}:v3</image>
-                    </to>
+                    <image>
+                        <name>jfrg28/${project.artifactId}:v3</name>
+                        <builder>paketobuildpacks/builder-jammy-full:latest</builder>
+                    </image>
                 </configuration>
             </plugin>
         </plugins>

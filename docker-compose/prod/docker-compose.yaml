@@ -16,7 +16,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: jfrg28/configserver:v2
+    image: jfrg28/configserver:v3
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -34,7 +34,7 @@ services:
       service: microservice-base-config
 
   eurekaserver:
-    image: jfrg28/eurekaserver:v1
+    image: jfrg28/eurekaserver:v2
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
@@ -166,7 +166,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: jfrg28/gatewayserver:v2
+    image: jfrg28/gatewayserver:v3
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -390,7 +390,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ../observability/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml
+      - ../observability/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yml
     extends:
       file: common-config.yml
       service: network-deploy-service

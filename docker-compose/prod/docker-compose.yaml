@@ -25,13 +25,15 @@ services:
         condition: service_healthy
     healthcheck:
       test: curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: configserver
 
   eurekaserver:
     image: jfrg28/eurekaserver:v2
@@ -43,15 +45,16 @@ services:
         condition: service_healthy
     healthcheck:
       test: curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
     environment:
       SPRING_APPLICATION_NAME: eurekaserver
+      OTEL_SERVICE_NAME: eurekaserver
 
   redis:
     image: redis
@@ -103,9 +106,9 @@ services:
       - "8080:8080"
     healthcheck:
       test: curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     depends_on:
       configserver:
@@ -115,6 +118,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: accounts
       SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
+      OTEL_SERVICE_NAME: accounts
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -126,9 +130,9 @@ services:
       - "8090:8090"
     healthcheck:
       test: curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     depends_on:
       configserver:
@@ -138,6 +142,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: loans
       SPRING_DATASOURCE_URL: jdbc:mysql://loans-server-db:3306/loansdb
+      OTEL_SERVICE_NAME: loans
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -149,9 +154,9 @@ services:
       - "9000:9000"
     healthcheck:
       test: curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1
-      interval: 10s
+      interval: 20s
       timeout: 5s
-      retries: 10
+      retries: 20
       start_period: 10s
     depends_on:
       configserver:
@@ -161,6 +166,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: cards
       SPRING_DATASOURCE_URL: jdbc:mysql://cards-server-db:3306/cardsdb
+      OTEL_SERVICE_NAME: cards
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -185,6 +191,7 @@ services:
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       SPRING_DATA_REDIS_TIMEOUT: 1s
+      OTEL_SERVICE_NAME: gatewayserver
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -395,6 +402,22 @@ services:
       file: common-config.yml
       service: network-deploy-service
   #End Prometheus config.
+
+  #Start Tempo config.
+  tempo:
+    image: grafana/tempo
+    container_name: "tempo"
+    command:
+      - config.file /etc/tempo-config.yml
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+    volumes:
+      - ../observability/tempo/tempo.yml:/etc/tempo-config.yml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+  #End Tempo config.
 
 networks:
   pacobank-network:

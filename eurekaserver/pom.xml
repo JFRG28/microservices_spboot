@@ -83,6 +83,10 @@
                     <image>
                         <name>jfrg28/${project.artifactId}:v2</name>
                         <builder>paketobuildpacks/builder-jammy-full:latest</builder>
+                        <env>
+                            <BP_OTEL_AGENT_ENABLED>true</BP_OTEL_AGENT_ENABLED>
+                            <BP_OTEL_AGENT_VERSION>1.27.0</BP_OTEL_AGENT_VERSION>
+                        </env>
                     </image>
                 </configuration>
             </plugin>

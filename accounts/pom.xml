@@ -146,7 +146,7 @@
 				<configuration>
 					<image>
 						<name>jfrg28/${project.artifactId}:v7</name>
-						<builder>paketobuildpacks/builder-jammy-full:latest</builder>
+						<builder>paketobuildpacks/builder-noble-java-tiny:latest</builder>
 					</image>
 					<excludes>
 						<exclude>

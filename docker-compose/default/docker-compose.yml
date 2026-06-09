@@ -14,6 +14,9 @@ services:
     extends:
       file: common-config.yml
       service: network-deploy-service
+    volumes:
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+
 
   configserver:
     image: jfrg28/configserver:v2

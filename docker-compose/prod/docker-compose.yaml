@@ -32,6 +32,8 @@ services:
     extends:
       file: common-config.yml
       service: microservice-base-config
+    environment:
+      OTEL_SERVICE_NAME: "configserver"
 
   eurekaserver:
     image: jfrg28/eurekaserver:v2
@@ -52,6 +54,7 @@ services:
       service: microservice-configserver-config
     environment:
       SPRING_APPLICATION_NAME: eurekaserver
+      OTEL_SERVICE_NAME: "eurekaserver"
 
   redis:
     image: redis
@@ -115,6 +118,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: accounts
       SPRING_DATASOURCE_URL: jdbc:mysql://accounts-server-db:3306/accountsdb
+      OTEL_SERVICE_NAME: "accounts"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -138,6 +142,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: loans
       SPRING_DATASOURCE_URL: jdbc:mysql://loans-server-db:3306/loansdb
+      OTEL_SERVICE_NAME: "loans"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -161,6 +166,7 @@ services:
     environment:
       SPRING_APPLICATION_NAME: cards
       SPRING_DATASOURCE_URL: jdbc:mysql://cards-server-db:3306/cardsdb
+      OTEL_SERVICE_NAME: "cards"
     extends:
       file: common-config.yml
       service: microservice-eureka-config
@@ -181,6 +187,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: gatewayserver
+      OTEL_SERVICE_NAME: "gatewayserver"
       SPRING_DATA_REDIS_CONNECT_TIMEOUT: 2s
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
@@ -271,6 +278,22 @@ services:
       file: common-config.yml
       service: network-deploy-service
 
+  #Start Tempo config.
+  tempo:
+    image: grafana/tempo:2.9.0
+    container_name: "tempo"
+    command: ["-config.file=/etc/tempo.yaml"]
+    ports:
+      - "3110:3100"
+      - "4317:4317"
+      - "4318:4318"
+    volumes:
+      - ../observability/tempo/tempo.yaml:/etc/tempo.yaml
+    extends:
+      file: common-config.yml
+      service: network-deploy-service
+  #End Tempo config.
+  
   grafana:
     image: grafana/grafana:latest
     environment:
@@ -395,22 +418,6 @@ services:
       file: common-config.yml
       service: network-deploy-service
   #End Prometheus config.
-
-  #Start Tempo config.
-  tempo:
-    image: grafana/tempo:2.9.0
-    container_name: "tempo"
-    command: ["-config.file=/etc/tempo.yaml"]
-    ports:
-      - "3110:3100"
-      - "4317:4317"
-      - "4318:4318"
-    volumes:
-      - ../observability/tempo/tempo.yaml:/etc/tempo.yaml
-    extends:
-      file: common-config.yml
-      service: network-deploy-service
-  #End Tempo config.
 
 networks:
   pacobank-network:

@@ -31,7 +31,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 35s
     extends:
       file: common-config.yml
       service: microservice-base-config
@@ -51,7 +51,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 35s
     extends:
       file: common-config.yml
       service: microservice-configserver-config
@@ -112,9 +112,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 35s
     depends_on:
       configserver:
+        condition: service_healthy
+      eurekaserver:
         condition: service_healthy
       accounts-server-db:
         condition: service_healthy
@@ -136,9 +138,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 35s
     depends_on:
       configserver:
+        condition: service_healthy
+      eurekaserver:
         condition: service_healthy
       loans-server-db:
         condition: service_healthy
@@ -160,9 +164,11 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
-      start_period: 10s
+      start_period: 35s
     depends_on:
       configserver:
+        condition: service_healthy
+      eurekaserver:
         condition: service_healthy
       cards-server-db:
         condition: service_healthy
